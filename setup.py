@@ -18,8 +18,7 @@ def main():
         scripts = ['bin/filterTranscripts.py'],
         author = "Alex Shi",
         platforms = ['Linux','MacOS'],
-        long_description = "FLORA is a fast workflow for assembling lncRNA transcriptome"
-        python_requires = '>=2.6, <3'
+        long_description = "FLORA is a fast workflow for assembling lncRNA transcriptome",
     )
 
 if __name__ == "__main__":

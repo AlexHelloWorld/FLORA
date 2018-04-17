@@ -24,7 +24,6 @@ def gtfToCpatBed(inputfile, outputfile, arbitrary_strand):
     output.close
 
 
-
 def getTranscriptId(input):
     position = input.find("transcript_id")
     endPosition = input[position+15:].find('"')

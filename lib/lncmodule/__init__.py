@@ -1,3 +1,4 @@
 from gtfToCpatBed import gtfToCpatBed
+from gtfToCpatBed import getTranscriptId
+from filterCPAT import filterCPAT
 from filterExonNumberAndLength import filterExonNumberAndLength
-from filter import filterCPAT
