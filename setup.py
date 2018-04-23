@@ -15,7 +15,7 @@ def main():
         description='FLORA (Fast Long-noncoding RNA Assembly Workflow)',
         packages = ['lncmodule'],
         package_dir = {'': 'lib'},
-        scripts = ['bin/filterTranscripts.py'],
+        scripts = ['bin/filterTranscripts.py', 'bin/generateFilteredBams.py'],
         author = "Alex Shi",
         platforms = ['Linux','MacOS'],
         long_description = "FLORA is a fast workflow for assembling lncRNA transcriptome",

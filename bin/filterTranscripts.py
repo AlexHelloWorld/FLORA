@@ -83,7 +83,7 @@ def main():
     cpat_parameters = [reference, hexamer_table, logit_model]
 
     generateLncTranscriptome(inputGTF, args.exon, args.length, args.cpat, cpat_parameters, outputGTF)
-    print("FLORA is finished!")
+    print("FLORA filterTranscripts is finished!")
 
     
 
