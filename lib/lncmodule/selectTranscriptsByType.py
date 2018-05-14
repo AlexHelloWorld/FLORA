@@ -14,9 +14,11 @@ def selectTranscriptsByType(typeList, gtfFile, outputDirectory):
     if outputDirectory[-1] != '/':
         outputDirectory = outputDirectory + '/'
 
-    outputFile = open(outputDirectory + gtfFile + '.selected', 'w')
+    # generate the correct name for gtf.selected output
+    gtfFileName = gtfFile[gtfFile.rfind('/')+1:]
+    outputFile = open(outputDirectory + gtfFileName + '.selected', 'w')
     outputFile.close()
-    outputFile = open(outputDirectory + gtfFile+'.selected', 'a')
+    outputFile = open(outputDirectory + gtfFileName+'.selected', 'a')
 
     holdGeneId = ''
     with open(gtfFile, 'r') as inputFile:
@@ -36,7 +38,7 @@ def selectTranscriptsByType(typeList, gtfFile, outputDirectory):
                     if lineId == holdGeneId:
                         outputFile.write(line)
     outputFile.close()
-    return outputDirectory + gtfFile+'.selected'
+    return outputDirectory + gtfFileName+'.selected'
     
     # start bedtools intersect with gtfFile.selected
 

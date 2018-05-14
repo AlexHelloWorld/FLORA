@@ -29,8 +29,8 @@ usage: generateFilteredBams [-h] -g INPUTGTF [-t TYPES [TYPES ...]]
                             inputBams
 
 positional arguments:
-  inputBams             The path to reference gene annotation file in GTF
-                        format. It can be downloaded from gencode website.
+  inputBams             The path to a txt file that contains paths to input
+                        bam files separated by the newline character.
 
 optional arguments:
   -h, --help            show this help message and exit

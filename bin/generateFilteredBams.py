@@ -28,7 +28,7 @@ def main():
     parser.add_argument('-t', dest='types',required=False, default='protein_coding', nargs='+', type=str, help='The gene types to be removed from BAM files.')
     parser.add_argument('-o', dest= 'outputDir',required=False, default='FLORA', type=str, help='Output directory for the output files')
     parser.add_argument('-n', dest='nThread', required=False, default=1, type=int, help='Number of threads to be used for bedtools intersect.')
-    parser.add_argument("inputBams", nargs=1, type=str, help='The path to reference gene annotation file in GTF format. It can be downloaded from gencode website.')
+    parser.add_argument("inputBams", nargs=1, type=str, help='The path to a txt file that contains paths to input bam files separated by the newline character.')
     
     # process parameters
     args = parser.parse_args()
