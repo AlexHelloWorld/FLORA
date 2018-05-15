@@ -1,6 +1,7 @@
 # select genes by gene type
 # after selection, use the selected genes to clean bam file
 
+import sys
 import os.path
 import Queue
 import threading
@@ -57,7 +58,7 @@ def bedtoolsClean(bamlist, gtfFile, nThread, outputDirectory):
         while True:
             path = q.get()
             name = path[path.rfind('/')+1:]
-            print('bedtools intersect starts run ' + name)
+            sys.stdout.write('bedtools intersect starts run ' + name)
             outputFilePath = outputDirectory + name + '.clean.bam'
             outputErrorPath = outputDirectory + name + '.err.log'
             errfile = open(outputErrorPath, 'w')

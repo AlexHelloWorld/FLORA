@@ -11,15 +11,15 @@ from lncmodule import bedtoolsClean
 
 def generateFilteredBams(gtfFile, bamList, removeTypes, nThread, outputDir):
     # create a temporal gtf file holding the regions to be removed
-    print('Generate temporal GTF file used in bedtools intersect.')
+    sys.stdout.write('Generate temporal GTF file used in bedtools intersect.')
     tGtfPath = selectTranscriptsByType(removeTypes, gtfFile, outputDir)
 
     # start bedtools intersect
-    print('Start bedtools intersect.')
+    sys.stdout.write('Start bedtools intersect.')
     success = bedtoolsClean(bamList, tGtfPath, nThread, outputDir)
 
     if success == 0:
-        print 'Filtered BAM files are created successfully!'
+        sys.stdout.write 'Filtered BAM files are created successfully!'
 
 
 def main():
@@ -44,7 +44,7 @@ def main():
         nThread = 1
 
     generateFilteredBams(args.inputGtf, bams, args.types, nThread, args.outputDir)
-    print("FLORA is finished!")
+    sys.stdout.write("FLORA is finished!")
 
 
 
