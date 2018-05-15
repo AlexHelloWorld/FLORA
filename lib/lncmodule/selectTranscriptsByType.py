@@ -58,7 +58,7 @@ def bedtoolsClean(bamlist, gtfFile, nThread, outputDirectory):
         while True:
             path = q.get()
             name = path[path.rfind('/')+1:]
-            print('bedtools intersect starts run ' + name, file=sys.stdout)
+            print >> sys.stdout, 'bedtools intersect starts run ' + name
             outputFilePath = outputDirectory + name + '.clean.bam'
             outputErrorPath = outputDirectory + name + '.err.log'
             errfile = open(outputErrorPath, 'w')
