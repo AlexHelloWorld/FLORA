@@ -18,19 +18,19 @@ def generateLncTranscriptome(inputFileName, exonNumberCutoff, lengthCutoff, cpat
     if not os.path.isdir('tmp/'):
         os.mkdir('tmp/')
     # convert the input gtf file (inputFileName) into bed file
-    sys.stdout.write('convert input gtf file into bed file')
+    print('convert input gtf file into bed file', file=sys.stdout)
     bedFilePositive = 'tmp/'+ inputFileName + '.positive.bed'
     bedFileNegative = 'tmp/'+ inputFileName + '.negative.bed'
     gtfToCpatBed(inputFileName, bedFilePositive, '+')
     gtfToCpatBed(inputFileName, bedFileNegative, '-')
     # summarize the exon number and transcript length from bed file
     # generate the list that contains transcript id that fit exonNumberCutoff and lengthCutoff
-    sys.stdout.write('summarize the exon number and length of transcripts')
+    print('summarize the exon number and length of transcripts', file=sys.stdout)
     exonSummarize = 'tmp/' + inputFileName + '.exonAndLength.txt'
     exonFiltered = filterExonNumberAndLength(bedFilePositive, exonNumberCutoff, lengthCutoff, exonSummarize)
 
     # run CPAT
-    sys.stdout.write('start run CPAT')
+    print('start run CPAT', file=sys.out)
     cpatPositiveFiltered = filterCPAT(bedFilePositive, cpatParameters, cpatCutoff)
     cpatNegativeFiltered = filterCPAT(bedFileNegative, cpatParameters, cpatCutoff)
 
@@ -38,7 +38,7 @@ def generateLncTranscriptome(inputFileName, exonNumberCutoff, lengthCutoff, cpat
     transcriptFiltered = set.intersection(set(exonFiltered), set(cpatPositiveFiltered), set(cpatNegativeFiltered))
     
     # keep transcripts in transcriptFiltered and write them into output
-    sys.stdout.write('output presumed long noncoding RNAs')
+    print('output presumed long noncoding RNAs', file=sys.stdout)
     output = open(outputfileName, 'w')
     output.close()
     output =  open(outputfileName, 'a')
@@ -83,7 +83,7 @@ def main():
     cpat_parameters = [reference, hexamer_table, logit_model]
 
     generateLncTranscriptome(inputGTF, args.exon, args.length, args.cpat, cpat_parameters, outputGTF)
-    sys.stdout.write("FLORA filterTranscripts is finished!")
+    print("FLORA filterTranscripts is finished!", file=sys.stdout)
 
     
 
