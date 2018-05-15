@@ -84,6 +84,7 @@ def main():
 
     generateLncTranscriptome(inputGTF, args.exon, args.length, args.cpat, cpat_parameters, outputGTF)
     print >> sys.stdout, "FLORA filterTranscripts is finished!"
+    return 0
 
     
 

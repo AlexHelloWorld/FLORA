@@ -45,6 +45,7 @@ def main():
 
     generateFilteredBams(args.inputGtf, bams, args.types, nThread, args.outputDir)
     print >> sys.stdout, "FLORA is finished!"
+    return 0
 
 
 
