@@ -55,22 +55,24 @@ def bedtoolsClean(bamlist, gtfFile, nThread, outputDirectory):
 
     # start call bedtools intersect 
     def callBedtools(q):
-        while True:
-            path = q.get()
-            name = path[path.rfind('/')+1:]
-            print >> sys.stdout, 'bedtools intersect starts run ' + name
-            outputFilePath = outputDirectory + name + '.clean.bam'
-            outputErrorPath = outputDirectory + name + '.err.log'
-            errfile = open(outputErrorPath, 'w')
-            with open(outputFilePath, 'w') as outfile:
-                subprocess.call(['bedtools', 'intersect', '-a', path, '-b', gtfFile, '-v'], stdout=outfile, stderr=errfile)
-            errfile.close()
-            q.task_done()
+        path = q.get()
+        name = path[path.rfind('/')+1:]
+        print >> sys.stdout, 'bedtools intersect starts run ' + name
+        outputFilePath = outputDirectory + name + '.clean.bam'
+        outputErrorPath = outputDirectory + name + '.err.log'
+        errfile = open(outputErrorPath, 'w')
+        with open(outputFilePath, 'w') as outfile:
+            subprocess.call(['bedtools', 'intersect', '-a', path, '-b', gtfFile, '-v'], stdout=outfile, stderr=errfile)
+        errfile.close()
+        q.task_done()
+        print("return something")
+        return 0
     
     queue =  Queue.Queue()
 
     for i in range(0, nThread):
         t = threading.Thread(target=callBedtools, args=(queue, ))
+        t.daemon = True
         t.start()
     
     for item in paths:
