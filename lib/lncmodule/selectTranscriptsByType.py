@@ -3,9 +3,10 @@
 
 import sys
 import os.path
-import Queue
-import threading
-import subprocess
+from subprocess import call
+from multiprocessing import Pool
+from functools import partial
+
 
 # this function will generate a temporal file to store the selected genes
 def selectTranscriptsByType(typeList, gtfFile, outputDirectory):
@@ -53,31 +54,17 @@ def bedtoolsClean(bamlist, gtfFile, nThread, outputDirectory):
     if outputDirectory[-1] != '/':
         outputDirectory = outputDirectory + '/'
 
-    # start call bedtools intersect 
-    def callBedtools(q):
-        path = q.get()
-        name = path[path.rfind('/')+1:]
-        print >> sys.stdout, 'bedtools intersect starts run ' + name
-        outputFilePath = outputDirectory + name + '.clean.bam'
-        outputErrorPath = outputDirectory + name + '.err.log'
-        errfile = open(outputErrorPath, 'w')
-        with open(outputFilePath, 'w') as outfile:
-            subprocess.call(['bedtools', 'intersect', '-a', path, '-b', gtfFile, '-v'], stdout=outfile, stderr=errfile)
-        errfile.close()
-        q.task_done()
-        print("return something")
-        return 0
+    # save commands to a list
+    commands = list()
+    for i in paths:
+        outputFilePath = outputDirectory + i[i.rfind('/')+1:] + '.clean.bam'
+        command = 'bedtools intersect -a ' + i[i.rfind('/')+1:] + ' -b ' + gtfFile + ' -v' + ' > ' + outputFilePath
+        commands.append(command)
     
-    queue =  Queue.Queue()
-
-    for i in range(0, nThread):
-        t = threading.Thread(target=callBedtools, args=(queue, ))
-        t.daemon = True
-        t.start()
-    
-    for item in paths:
-        queue.put(item)
-    queue.join()
+    pool = Pool(nThread)
+    for i, returncode in enumerate(pool.imap_unordered(partial(call, shell=True), commands)):
+        if returncode != 0:
+            print("%d command failed: %d" % (i, returncode))
 
     return 0
             
