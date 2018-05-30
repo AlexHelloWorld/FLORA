@@ -70,3 +70,31 @@ optional arguments:
   -o OUTPUTGTF  Output prefix for the final transcriptome GTF file
 ```
 
+### annotateTranscripts.py
+
+Find overlapped and nearby genes of lncRNAs in reference annotation (RefSeq or GENCODE annotation in GFF format)
+
+```
+usage: annotateTranscripts [-h] -r REFERENCE -f PATH [-i IDENTIFIER]
+                           [-d DISTANCE] [-n NUMBER] [-o OUTPUT]
+                           inputGTF
+
+positional arguments:
+  inputGTF       Input transcriptome file in GTF format. The file could be
+                 output from Cufflinks or StringTie
+
+optional arguments:
+  -h, --help     show this help message and exit
+  -r REFERENCE   Identify the source of reference annotation. Currently, it
+                 should be either refseq or gencode
+  -f PATH        The path to the reference annotation file.
+  -i IDENTIFIER  The path to the RefSeq assembly report. The file is used to
+                 replace RefSeq sequence identifiers with USCS identifiers.
+                 Required if you use RefSeq annotation.
+  -d DISTANCE    Specify the distance within which the nearby genes should
+                 locate. Default: 10,000 bp. Unit: bp.
+  -n NUMBER      Specify the number of nearby genes obtained. Default: 1.
+  -o OUTPUT      Output file name for the final annotation. Default:
+                 FLORA_annotation.txt
+```
+

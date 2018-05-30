@@ -6,6 +6,7 @@ import os.path
 from subprocess import call
 from multiprocessing import Pool
 from functools import partial
+from handleGTF import getGtfComponent
 
 
 # this function will generate a temporal file to store the selected genes
@@ -69,10 +70,4 @@ def bedtoolsClean(bamlist, gtfFile, nThread, outputDirectory):
     return 0
             
 
-
-def getGtfComponent(input, keyword):
-    geneIdPosition = input.find(keyword)
-    length = len(keyword) + 2
-    geneIdEndPosition = input[geneIdPosition+length:].find('"')
-    return input[geneIdPosition+length:geneIdPosition+length+geneIdEndPosition]
 

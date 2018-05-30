@@ -4,3 +4,7 @@ from filterCPAT import filterCPAT
 from filterExonNumberAndLength import filterExonNumberAndLength
 from selectTranscriptsByType import selectTranscriptsByType
 from selectTranscriptsByType import bedtoolsClean
+from organizeGencodeGFF import organizeGencodeGFF
+from organizeRefSeqGFF import organizeRefSeqGFF
+from organizeAnnotationInput import organizeInput
+from annotateGenes import annotateGenes
