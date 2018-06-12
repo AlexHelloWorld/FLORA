@@ -59,7 +59,7 @@ def bedtoolsClean(bamlist, gtfFile, nThread, outputDirectory):
     commands = list()
     for i in paths:
         outputFilePath = outputDirectory + i[i.rfind('/')+1:] + '.clean.bam'
-        command = 'bedtools intersect -a ' + i[i.rfind('/')+1:] + ' -b ' + gtfFile + ' -v' + ' > ' + outputFilePath
+        command = 'bedtools intersect -a ' + i + ' -b ' + gtfFile + ' -v' + ' > ' + outputFilePath
         commands.append(command)
     
     pool = Pool(nThread)
