@@ -30,7 +30,7 @@ def generateLncTranscriptome(inputFileName, exonNumberCutoff, lengthCutoff, cpat
     exonFiltered = filterExonNumberAndLength(bedFilePositive, exonNumberCutoff, lengthCutoff, exonSummarize)
 
     # run CPAT
-    print >> sys.out, 'start run CPAT'
+    print >> sys.stdout, 'start run CPAT'
     cpatPositiveFiltered = filterCPAT(bedFilePositive, cpatParameters, cpatCutoff)
     cpatNegativeFiltered = filterCPAT(bedFileNegative, cpatParameters, cpatCutoff)
 
